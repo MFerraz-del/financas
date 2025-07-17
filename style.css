@@ -1,0 +1,448 @@
+/* Importar fonte Inter no seu HTML dentro do <head>:
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+*/
+
+/* Variáveis CSS para cores, bordas e transições */
+:root {
+  --primary-color: #1976d2;
+  --primary-dark: #0d47a1;
+  --secondary-color: #4caf50;
+  --secondary-dark: #388e3c;
+  --background-light: #f9f9f9;
+  --background-dark: #121212;
+  --card-bg-light: #ffffff;
+  --card-bg-dark: #1e1e1e;
+  --text-light: #eee;
+  --text-dark: #222;
+  --border-color-light: #ccc;
+  --border-color-dark: #555;
+  --border-radius: 10px;
+  --transition: 0.3s ease;
+  --shadow-light: 0 3px 8px rgba(0,0,0,0.1);
+  --shadow-dark: 0 3px 8px rgba(0,0,0,0.6);
+}
+
+/* Reset básico */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Body e temas */
+body {
+  background-color: var(--background-light);
+  color: var(--text-dark);
+  min-height: 100vh;
+  padding: 20px;
+  transition: background-color var(--transition), color var(--transition);
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+body.dark-mode {
+  background-color: var(--background-dark);
+  color: var(--text-light);
+}
+
+/* Header */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+header h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+#toggleDarkMode {
+  background: var(--primary-color);
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 1rem;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(25, 118, 210, 0.4);
+  transition: background-color var(--transition), box-shadow var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+#toggleDarkMode:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 6px 14px rgba(13, 71, 161, 0.6);
+}
+
+body.dark-mode #toggleDarkMode {
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 8px rgba(76, 175, 80, 0.4);
+  color: white;
+}
+
+body.dark-mode #toggleDarkMode:hover {
+  background-color: var(--secondary-dark);
+  box-shadow: 0 6px 14px rgba(56, 142, 60, 0.6);
+}
+
+/* Main layout */
+main {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Form Section */
+#form-section {
+  background-color: var(--card-bg-light);
+  padding: 25px 30px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 30px;
+  transition: background-color var(--transition), box-shadow var(--transition);
+}
+
+body.dark-mode #form-section {
+  background-color: var(--card-bg-dark);
+  box-shadow: var(--shadow-dark);
+}
+
+#form-section input[type="text"],
+#form-section input[type="number"],
+#form-section input[type="date"],
+#form-section select {
+  flex: 1 1 140px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border-color-light);
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  background-color: white;
+  color: var(--text-dark);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05);
+}
+
+body.dark-mode #form-section input[type="text"],
+body.dark-mode #form-section input[type="number"],
+body.dark-mode #form-section input[type="date"],
+body.dark-mode #form-section select {
+  background-color: #2a2a2a;
+  border-color: var(--border-color-dark);
+  color: var(--text-light);
+  box-shadow: none;
+}
+
+#form-section input::placeholder {
+  color: #999;
+}
+
+#form-section input[type="text"]:focus,
+#form-section input[type="number"]:focus,
+#form-section input[type="date"]:focus,
+#form-section select:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 8px var(--secondary-color);
+  outline: none;
+  background-color: white;
+  color: var(--text-dark);
+}
+
+body.dark-mode #form-section input[type="text"]:focus,
+body.dark-mode #form-section input[type="number"]:focus,
+body.dark-mode #form-section input[type="date"]:focus,
+body.dark-mode #form-section select:focus {
+  background-color: #394939;
+  color: var(--text-light);
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 8px var(--secondary-color);
+}
+
+#form-section button {
+  padding: 14px 24px;
+  background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  box-shadow: 0 5px 12px rgba(76, 175, 80, 0.5);
+  transition: background var(--transition), box-shadow var(--transition);
+  flex: 0 0 150px;
+}
+
+#form-section button:hover {
+  background: linear-gradient(135deg, var(--secondary-dark), #2e7d32);
+  box-shadow: 0 7px 16px rgba(46, 125, 50, 0.7);
+}
+
+/* Resumo */
+#resumo {
+  margin-bottom: 35px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  text-align: center;
+}
+
+body.dark-mode #resumo {
+  color: var(--secondary-color);
+}
+
+/* Seção filtros */
+#filtros {
+  background-color: var(--card-bg-light);
+  padding: 20px 25px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  align-items: center;
+  margin-bottom: 40px;
+  color: var(--text-dark);
+  font-weight: 500;
+  transition: background-color var(--transition), box-shadow var(--transition), color var(--transition);
+}
+
+body.dark-mode #filtros {
+  background-color: var(--card-bg-dark);
+  box-shadow: var(--shadow-dark);
+  color: var(--text-light);
+}
+
+#filtros h2 {
+  flex-basis: 100%;
+  margin-bottom: 10px;
+  font-weight: 600;
+  font-size: 1.25rem;
+}
+
+#filtros label {
+  margin-left: 8px;
+  white-space: nowrap;
+}
+
+#filtros select,
+#filtros input[type="date"] {
+  padding: 10px 14px;
+  border-radius: var(--border-radius);
+  border: 1.5px solid var(--border-color-light);
+  font-size: 1rem;
+  min-width: 140px;
+  transition: border-color var(--transition), box-shadow var(--transition);
+  background-color: white;
+  color: var(--text-dark);
+}
+
+body.dark-mode #filtros select,
+body.dark-mode #filtros input[type="date"] {
+  background-color: #2a2a2a;
+  border-color: var(--border-color-dark);
+  color: var(--text-light);
+}
+
+#filtros select:focus,
+#filtros input[type="date"]:focus {
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 8px var(--secondary-color);
+  outline: none;
+  background-color: white;
+  color: var(--text-dark);
+}
+
+body.dark-mode #filtros select:focus,
+body.dark-mode #filtros input[type="date"]:focus {
+  background-color: #394939;
+  color: var(--text-light);
+  border-color: var(--secondary-color);
+  box-shadow: 0 0 8px var(--secondary-color);
+}
+
+#filtros button {
+  cursor: pointer;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: var(--border-radius);
+  padding: 12px 24px;
+  font-weight: 700;
+  font-size: 1rem;
+  transition: background-color var(--transition);
+  min-width: 150px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 9px rgba(25, 118, 210, 0.45);
+}
+
+#filtros button:hover {
+  background-color: var(--primary-dark);
+  box-shadow: 0 6px 14px rgba(13, 71, 161, 0.7);
+}
+
+body.dark-mode #filtros button {
+  background-color: var(--secondary-color);
+  box-shadow: 0 4px 9px rgba(76, 175, 80, 0.45);
+}
+
+body.dark-mode #filtros button:hover {
+  background-color: var(--secondary-dark);
+  box-shadow: 0 6px 14px rgba(46, 125, 50, 0.7);
+}
+
+/* Responsividade para filtros */
+@media (max-width: 600px) {
+  #filtros {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  #filtros label {
+    margin-left: 0;
+  }
+
+  #filtros select,
+  #filtros input[type="date"],
+  #filtros button {
+    width: 100%;
+    min-width: unset;
+  }
+}
+
+/* Lista de transações */
+#transacoes ul {
+  list-style: none;
+}
+
+.transacao {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 20px;
+  margin-bottom: 12px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  font-weight: 600;
+  font-size: 1rem;
+  transition: background-color var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+body.dark-mode .transacao {
+  box-shadow: var(--shadow-dark);
+}
+
+.transacao.entrada {
+  background-color: #e8f5e9; /* verde claro */
+  color: #2e7d32;
+}
+
+.transacao.saida {
+  background-color: #ffebee; /* vermelho claro */
+  color: #c62828;
+}
+
+body.dark-mode .transacao.entrada {
+  background-color: #1b351b;
+  color: #81c784;
+}
+
+body.dark-mode .transacao.saida {
+  background-color: #4a1f1f;
+  color: #ef9a9a;
+}
+
+.transacao span {
+  font-size: 1rem;
+}
+
+.transacao button.remover {
+  background: none;
+  border: none;
+  color: #888;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: color var(--transition);
+}
+
+.transacao button.remover:hover {
+  color: #c62828;
+}
+
+body.dark-mode .transacao button.remover:hover {
+  color: #ff8a80;
+}
+
+/* Seção gráfico */
+#grafico {
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+/* Responsividade simples */
+@media (max-width: 600px) {
+  #form-section {
+    flex-direction: column;
+  }
+  #form-section button {
+    width: 100%;
+  }
+  #filtros {
+    flex-direction: column;
+  }
+  #filtros button {
+    width: 100%;
+  }
+}
+
+/* Botões de exportação */
+.botoes-exportacao button {
+  background: linear-gradient(135deg, var(--secondary-color), var(--secondary-dark));
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  margin-right: 12px;
+  border-radius: var(--border-radius);
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+  box-shadow: 0 4px 10px rgba(76, 175, 80, 0.45);
+}
+
+.botoes-exportacao button:last-child {
+  margin-right: 0;
+}
+
+.botoes-exportacao button:hover {
+  background: linear-gradient(135deg, var(--secondary-dark), #2e7d32);
+  box-shadow: 0 6px 16px rgba(46, 125, 50, 0.7);
+}
+
+.botoes-exportacao button:active {
+  background-color: #2e7d32;
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.3);
+}
+
+/* Responsividade botões exportação */
+@media (max-width: 480px) {
+  .botoes-exportacao {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .botoes-exportacao button {
+    width: 100%;
+    margin-right: 0;
+  }
+}
+
