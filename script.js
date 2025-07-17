@@ -26,10 +26,7 @@ const ctx = document.getElementById('graficoFinancas').getContext('2d');
 // Verificar login (nome salvo)
 window.addEventListener("DOMContentLoaded", () => {
   const nomeSalvo = localStorage.getItem("nomeUsuario");
-  if (!nomeSalvo) {
-    window.location.href = "login.html"; // redireciona para login se não tiver nome
-    return;
-  }
+
   if (saudacao) {
     saudacao.textContent = `Bem-vinda, ${nomeSalvo}!`;
   }
