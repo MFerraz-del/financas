@@ -23,13 +23,6 @@ let transacoesFiltradas = []; // NOVA VARIÁVEL PARA TRANSACOES FILTRADAS
 let grafico;
 const ctx = document.getElementById('graficoFinancas').getContext('2d');
 
-// Verificar login (nome salvo)
-window.addEventListener("DOMContentLoaded", () => {
-  const nomeSalvo = localStorage.getItem("nomeUsuario");
-
-  if (saudacao) {
-    saudacao.textContent = `Bem-vinda, ${nomeSalvo}!`;
-  }
 
   carregarTransacoes();
   atualizarCategorias();
