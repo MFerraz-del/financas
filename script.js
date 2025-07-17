@@ -19,19 +19,25 @@ const categoriasEntrada = ["Mesada", "Salário", "Outros"];
 const categoriasSaida = ["Uber", "Alimentação", "Transporte", "Lazer", "Outros"];
 
 let transacoes = [];
-let transacoesFiltradas = []; // NOVA VARIÁVEL PARA TRANSACOES FILTRADAS
 let grafico;
 const ctx = document.getElementById('graficoFinancas').getContext('2d');
 
+// Verificar login (nome salvo)
+window.addEventListener("DOMContentLoaded", () => {
+  const nomeSalvo = localStorage.getItem("nomeUsuario");
+  if (!nomeSalvo) {
+    window.location.href = "login.html"; // redireciona para login se não tiver nome
+    return;
+  }
+  if (saudacao) {
+    saudacao.textContent = `Bem-vinda, ${nomeSalvo}!`;
+  }
 
   carregarTransacoes();
   atualizarCategorias();
   atualizarFiltroCategorias();
   carregarTema();
-
-  // Inicializa transacoesFiltradas com todas as transações ao carregar
-  transacoesFiltradas = [...transacoes];
-  atualizarInterface(transacoesFiltradas);
+  atualizarInterface();
 });
 
 // Atualiza categorias do select de categoria conforme tipo escolhido
@@ -126,9 +132,7 @@ function limparCampos() {
 function removerTransacao(id) {
   transacoes = transacoes.filter(t => t.id !== id);
   salvarTransacoes();
-  // Atualiza transacoesFiltradas para refletir a exclusão
-  transacoesFiltradas = transacoesFiltradas.filter(t => t.id !== id);
-  atualizarInterface(transacoesFiltradas);
+  atualizarInterface();
 }
 
 function atualizarGrafico(transacoesParaMostrar) {
@@ -223,17 +227,16 @@ function atualizarInterface(transacoesParaMostrar = transacoes) {
   atualizarGrafico(transacoesParaMostrar);
 }
 
-// ----- FUNÇÕES DE EXPORTAÇÃO -----
-// Agora usam transacoesFiltradas para exportar só o que está filtrado
+// ----- NOVAS FUNÇÕES PARA EXPORTAÇÃO -----
 
 // Exportar CSV
 function exportarCSV() {
-  if (transacoesFiltradas.length === 0) {
+  if (transacoes.length === 0) {
     alert("Não há transações para exportar.");
     return;
   }
   const headers = ['Descrição', 'Tipo', 'Categoria', 'Valor', 'Data'];
-  const rows = transacoesFiltradas.map(t => [
+  const rows = transacoes.map(t => [
     `"${t.descricao.replace(/"/g, '""')}"`, 
     t.tipo, 
     t.categoria, 
@@ -257,7 +260,7 @@ function exportarCSV() {
 
 // Exportar PDF (precisa do jsPDF incluído no HTML)
 function exportarPDF() {
-  if (transacoesFiltradas.length === 0) {
+  if (transacoes.length === 0) {
     alert("Não há transações para exportar.");
     return;
   }
@@ -280,7 +283,7 @@ function exportarPDF() {
 
   y += linhaAltura;
 
-  transacoesFiltradas.forEach(t => {
+  transacoes.forEach(t => {
     if(y > 280){
       doc.addPage();
       y = 20;
@@ -333,17 +336,13 @@ document.getElementById("adicionar").addEventListener("click", () => {
 
   transacoes.push(transacao);
   salvarTransacoes();
-
-  // Atualiza transacoesFiltradas para refletir a nova transação, respeitando filtros
-  transacoesFiltradas = filtrarTransacoes();
-  atualizarInterface(transacoesFiltradas);
-
+  atualizarInterface();
   limparCampos();
 });
 
 btnAplicarFiltro.addEventListener("click", () => {
-  transacoesFiltradas = filtrarTransacoes();
-  atualizarInterface(transacoesFiltradas);
+  const filtradas = filtrarTransacoes();
+  atualizarInterface(filtradas);
 });
 
 btnLimparFiltro.addEventListener("click", () => {
@@ -351,9 +350,7 @@ btnLimparFiltro.addEventListener("click", () => {
   filtroCategoria.value = "todos";
   dataInicio.value = "";
   dataFim.value = "";
-
-  transacoesFiltradas = [...transacoes];
-  atualizarInterface(transacoesFiltradas);
+  atualizarInterface(transacoes);
 });
 
 // Eventos para exportação (botões precisam existir no HTML)
